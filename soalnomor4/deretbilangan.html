@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="inputN">Counter:</label>
+    <input type="number" id="inputN">
+    <button onclick="tampilkanDeret()">Generate</button>
+    <p id="output" style="display: block; width: 50px;"></p>
+
+    <script>
+        function tampilkanDeret() {
+            const n = parseInt(document.getElementById('inputN').value);
+            const outputElement = document.getElementById('output');
+            let deret = [];
+            let currentNumber = 1;
+
+            while (deret.length < n) {
+                if (currentNumber % 2 !== 0) { // Hanya tambahkan bilangan ganjil
+                    let numString = currentNumber.toString();
+
+                    if ((currentNumber % 3 === 0 || numString.includes('3')) && !(currentNumber % 3 === 0 && numString.includes('3'))) {
+                        deret.push('TRANS');
+                    } else if (currentNumber % 3 === 0 && numString.includes('3')) {
+                        deret.push('SEVEN');
+                    } else {
+                        deret.push(currentNumber);
+                    }
+                }
+
+                currentNumber++;
+            }
+
+            // Menggabungkan elemen array menjadi string dengan pemisah koma
+            const deretString = deret.join(', ');
+            outputElement.textContent = `${deretString}`;
+        }
+    </script>
+</body>
+
+</html>

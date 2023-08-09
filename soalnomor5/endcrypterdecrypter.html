@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="display: block;">
+        <div>
+            <label for="input">Input Text:</label>
+            <input type="text" id="input" placeholder="Enter text here">
+            <button onclick="encrypt()">Encrypt</button>
+        </div>
+        <div>
+            <label for="input">Input Text:</label>
+            <input type="text" id="input" placeholder="Enter text here">
+            <button onclick="decrypt()">Decrypt</button>
+        </div>
+        <p id="result">hasil:</p>
+    </div>
+
+    <script>
+        function encrypt() {
+            const inputText = document.getElementById("input").value.toLowerCase();
+            const vowels = ['a', 'i', 'u', 'e', 'o'];
+            const primes = [2, 3, 5, 7, 11]; // You can add more primes if needed
+            let encryptedText = "";
+
+            for (let i = 0; i < inputText.length; i++) {
+                const char = inputText[i];
+                if (vowels.includes(char)) {
+                    const vowelIndex = vowels.indexOf(char);
+                    const shift = primes[i % primes.length];
+                    const encryptedIndex = (vowelIndex + shift) % vowels.length;
+                    encryptedText += vowels[encryptedIndex];
+                } else {
+                    encryptedText += char;
+                }
+            }
+
+            document.getElementById("result").textContent = "Encrypted: " + encryptedText;
+        }
+
+        function decrypt() {
+            const inputText = document.getElementById("input").value.toLowerCase();
+            const vowels = ['a', 'i', 'u', 'e', 'o'];
+            const primes = [2, 3, 5, 7, 11]; // You can add more primes if needed
+            let decryptedText = "";
+
+            for (let i = 0; i < inputText.length; i++) {
+                const char = inputText[i];
+                if (vowels.includes(char)) {
+                    const vowelIndex = vowels.indexOf(char);
+                    const shift = primes[i % primes.length];
+                    // To get the original index, we subtract the shift value
+                    const decryptedIndex = (vowelIndex - shift + vowels.length) % vowels.length;
+                    decryptedText += vowels[decryptedIndex];
+                } else {
+                    decryptedText += char;
+                }
+            }
+
+            document.getElementById("result").textContent = "Decrypted: " + decryptedText;
+        }
+    </script>
+</body>
+
+</html>
